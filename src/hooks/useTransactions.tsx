@@ -1,68 +1,85 @@
-import {  createContext, useState, useEffect, ReactNode, useContext } from 'react'
-import { api } from '../services/api'
+import { useEffect, useState } from 'react'
+import { BaseQuery, Meta } from 'types/backend'
+
+import { GetTransaction } from 'types/transaction'
+
+import { getTransaction as getTransactionApi } from 'services/transaction'
+import useBoolean from './useBoolean'
+import { Analytics } from 'types/analytics'
+import { getAnalytics } from 'services/analytics'
+
+type Transaction = GetTransaction
 
 
-interface Transaction {
-    id: number,
-    title: string,
-    amount: number,
-    type: string,
-    category: string,
-    createdAt: string
+interface Options {
+    query?: BaseQuery,
+    loadOnMount?: boolean
 }
 
-type TransactionInput = Omit<Transaction, 'id' | 'createdAt'>
-
-interface TransactionsProviderProps {
-    children: ReactNode
+const baseMeta: Meta = {
+    _next_page: 0,
+    _page: 0,
+    _per_page: 0,
+    _previues_page: 0,
+    _total_items: 0,
+    _total_pages: 0
 }
 
+const baseQueries: BaseQuery = {}
 
-interface TransactionsContextData {
-    transactions: Transaction[],
-    createTransaction: (transaction: TransactionInput) => Promise<void>
+const baseAnalytics: Analytics = {
+    expense: 0,
+    income: 0,
+    total: 0
 }
 
-
- const TransactionsContext = createContext<TransactionsContextData>(
-    {} as TransactionsContextData
-)
-
-
-export function TransactionsProvider({ children }: TransactionsProviderProps) {
+export function useTransactions (options?: Options) {
     const [transactions, setTransactions] = useState<Transaction[]>([])
+    const [analytics, setAnalytics] = useState(baseAnalytics)
+    const [meta, setMeta] = useState(baseMeta)
+    const [isLoading, toggleIsLoading] = useBoolean(false)
+
+    const [queries, setQueries] = useState<BaseQuery>(baseQueries)
+
+    const getAnalyticsRequest = async () => {
+        const { data } = await getAnalytics()
+
+        setAnalytics(data)
+    }
+
+
+    const handleLoadTransaction = async (query?: BaseQuery) => {
+        try {
+            const { data } = await getTransactionApi(query)
+            toggleIsLoading()
+
+            setTransactions(data.data)
+            setMeta(data.meta)
+            getAnalyticsRequest()
+        } catch (err) {
+            console.log(err)
+        } finally {
+            toggleIsLoading()
+        }
+
+    }
+
+    const cleanQueries = () => {
+        setQueries(baseQueries)
+    }
 
     useEffect(() => {
-        api.get('/transactions')
-        .then(response => setTransactions(response.data.transactions))
+        options?.loadOnMount && handleLoadTransaction(options?.query)
     }, [])
 
-    async function createTransaction(transactionInput: TransactionInput) {
-      
-      const response = await api.post('/transactions', {
-          ...transactionInput,
-          createdAt: new Date()
-      })
-      const { transaction } = response.data
-
-      setTransactions([
-          ...transactions, 
-          transaction
-      ])
-
-
+    return {
+        isLoading,
+        transactions,
+        meta,
+        handleLoadTransaction,
+        queries, 
+        setQueries,
+        cleanQueries,
+        analytics
     }
-
-    return (
-        <TransactionsContext.Provider value={{ transactions, createTransaction}}>
-            {children}
-        </TransactionsContext.Provider>
-    )
-    }
-
-
-    export function useTransactions() {
-        const context = useContext(TransactionsContext)
-
-        return context
-    }
+}

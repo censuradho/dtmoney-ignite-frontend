@@ -1,0 +1,4 @@
+export const TRANSACTION_TYPE = {
+  EXPENSE: 'EXPENSE',
+  INCOME: 'INCOME'
+}

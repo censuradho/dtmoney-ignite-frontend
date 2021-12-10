@@ -1,31 +1,24 @@
-import React, {  useContext } from 'react'
+import { useEffect, useState } from 'react'
+import { Analytics } from 'types/analytics';
 import incomeImg from "../../assets/income.svg"
 import outcomeImg from "../../assets/outcome.svg"
 import totalImg from "../../assets/total.svg"
-import { useTransactions } from '../../hooks/useTransactions';
 
 
 import { Container } from "./styles";
 
+import { getAnalytics as getAnalyticsApi } from 'services/analytics'
+import { useTransactions } from 'hooks/useTransactions';
+import { useTransactionContext } from 'Provider/TransactionProvider';
+
+const baseAnalytics: Analytics = {
+    expense: 0,
+    income: 0,
+    total: 0
+}
+
 export function Summary() {
-
-    const { transactions } = useTransactions()
-     
-    const summary = transactions.reduce((acc, transaction) => {
-        if (transaction.type === 'deposit') {
-            acc.deposits += transaction.amount
-            acc.total += transaction.amount
-        } else {
-            acc.withdraws += transaction.amount
-            acc.total -= transaction.amount
-        }
-
-        return acc
-    }, {
-        deposits: 0,
-        withdraws: 0,
-        total: 0
-    })
+    const { analytics } = useTransactionContext()
 
     return(
         <Container>
@@ -36,9 +29,9 @@ export function Summary() {
                 </header>
                 <strong>
                 {new Intl.NumberFormat('pt-BR', {
-                                    style: 'currency',
-                                    currency: 'BRL'
-                                }).format(summary.deposits)}
+                    style: 'currency',
+                    currency: 'BRL'
+                }).format(analytics.income)}
                     
                 </strong>
             </div>
@@ -49,9 +42,9 @@ export function Summary() {
                 </header>
                 <strong>
                 {new Intl.NumberFormat('pt-BR', {
-                                    style: 'currency',
-                                    currency: 'BRL'
-                                }).format(summary.withdraws)}
+                    style: 'currency',
+                    currency: 'BRL'
+                }).format(analytics.expense)}
                 </strong>
             </div>
             <div className="highLightBackground">
@@ -61,9 +54,9 @@ export function Summary() {
                 </header>
                 <strong>
                     {new Intl.NumberFormat('pt-BR', {
-                                        style: 'currency',
-                                        currency: 'BRL'
-                                    }).format(summary.total)}
+                        style: 'currency',
+                        currency: 'BRL'
+                    }).format(analytics.total)}
                 </strong>   
             </div>
         </Container>

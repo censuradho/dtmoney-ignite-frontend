@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle `
     }
 
     body {
-        background: var(--background);
+        background: ${({ theme }) => theme.colors.background};
         -webkit-font-smoothing: antialiased; 
     }
 
@@ -44,11 +44,13 @@ export const GlobalStyle = createGlobalStyle `
 
     button {
         cursor: pointer;
-    }
+        transition: filter 0.2s;
+        border: 0;
+        font-size: 1rem;
 
-    [disabled] {
-        opacity: pointer;
-        cursor: not-allowed;
+        &:hover {
+            filter: brightness(0.9);
+        }  
 
     }
 
@@ -67,7 +69,7 @@ export const GlobalStyle = createGlobalStyle `
     .react-modal-content {
         width: 100%;
         max-width: 576px;
-        background: var(--background);
+        background: ${({ theme }) => theme.colors.background};
         padding: 3rem;
         position: relative;
         border-radius: 0.25rem;

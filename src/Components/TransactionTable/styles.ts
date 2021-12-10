@@ -1,7 +1,16 @@
 import styled from 'styled-components'
 
+export const PaginateContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+`
+
 export const Container = styled.div `
     margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 
     table {
         width: 100%;
@@ -27,11 +36,11 @@ export const Container = styled.div `
                 color: var(--text-title);
             }
             
-            &.deposit {
+            &.income {
                 color: var(--green);
             }
 
-            &.withdraw {
+            &.expense {
                 color: var(--red);
             }
         }

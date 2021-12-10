@@ -1,40 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createServer, Model } from 'miragejs'
-import App from './App';
+import {  Provider } from 'react-redux'
 
-createServer({
-  models: {
-    transaction: Model,
-  },
+import store from 'store';
 
-  seeds(server) {
-    server.db.loadData({
-      transactions: [],
-    })
-  },
-
-  routes() {
-    this.namespace = 'api'
-
-    this.get('/transactions', () => {
-
-      return this.schema.all('transaction')
-    })
-  
-    this.post('/transactions', (schema, request) => {
-      const data = JSON.parse(request.requestBody)
-
-      return schema.create('transaction', data)
-    })
-
-}
-})
+import App from './App'
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
