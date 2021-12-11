@@ -65,6 +65,7 @@ export function Login () {
         <Input placeholder="E-mail" name="email" value={payload.email} onChange={handleChange} />
         <Input placeholder="Password" name="password" value={payload.password} onChange={handleChange}/>
         <Button variante="green" disabled={isLoading} fullWidth>Login</Button>
+        <span>Não tem uma conta? <Styles.Link to={routePaths.public.registration}>Cadastre-se</Styles.Link></span>
       </Styles.Form>
     </Styles.Container>
   )

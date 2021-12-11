@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { Console } from 'console'
+
 import { errorMessages, ERROR_CONSTANTS } from 'constants/errors'
 
 import { refrashToken } from 'services/auth'
@@ -37,9 +37,12 @@ backend.interceptors.response.use(config => {
       type: 'error'
     })
 
-    response.data.errors && openNotification(errorMessages[ERROR_CONSTANTS.VALIDATION_ERROR], {
-      type: 'error'
-    })
+    response.data.errors && openNotification(
+      errorMessages[ERROR_CONSTANTS.VALIDATION_ERROR] || errorMessages[ERROR_CONSTANTS.DEFAULT], 
+      {
+        type: 'error'
+      }
+    )
   }
 
   throw response;

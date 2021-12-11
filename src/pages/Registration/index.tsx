@@ -45,9 +45,9 @@ export function Registration () {
     try {
     toggleLoading()
       
-    openNotification('Cadastro realizado com sucesso!')
     await signUp(payload)
-
+    
+    openNotification('Cadastro realizado com sucesso!')
 
 
     navigate(routePaths.public.login)
@@ -64,6 +64,7 @@ export function Registration () {
         <Input placeholder="E-mail" name="email" value={payload.email} onChange={handleChange} />
         <Input placeholder="Password" name="password" value={payload.password} onChange={handleChange}/>
         <Button variante="green" disabled={isLoading} fullWidth>Confirmar</Button>
+        <span>Tem uma conta? <Styles.Link to={routePaths.public.login}>Conecte-se</Styles.Link></span>
       </Styles.Form>
     </Styles.Container>
   )

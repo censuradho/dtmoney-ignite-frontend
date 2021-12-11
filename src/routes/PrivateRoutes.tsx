@@ -1,25 +1,27 @@
-import { routePaths } from 'constants/routes'
-import { useSelector } from 'react-redux'
-import { Navigate, Routes, useLocation, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate, Routes, useLocation, Route, useNavigate } from 'react-router-dom'
 
 import { Admin } from 'layout'
 
-import { Home, Perfil } from 'pages'
+import { routePaths } from 'constants/routes'
+import { Home } from 'pages'
 
 export function PrivateRoutes () {
-  const location = useLocation()
   const auth = useSelector(value => value.auth)
+  const navigation = useNavigate()
 
-  if (!auth?.token) return <Navigate to={routePaths.public.login}  state={{ from: location }}/>
-  if (!auth.user.profile) return <Route path={routePaths.private.perfil} element={<Perfil />} />
+
+useEffect(() => {
+  if (!auth?.token) navigation(routePaths.public.login)
+}, [auth])
   
   return (
-
       <Routes>
         <Route element={<Admin />}>
           <Route path={routePaths.private.home} element={<Home />} />
         </Route>
-        
+        <Route path="*" element={<Navigate to={`${routePaths.private.app}${routePaths.private.home}`} />} />
       </Routes>
   )
 }

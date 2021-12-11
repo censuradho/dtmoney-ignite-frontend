@@ -1,4 +1,5 @@
 import { SignInResponse, RefrashTokenResponse } from 'types/auth'
+import { GetPerfilResponse } from 'types/perfil'
 
 import { authTypes } from './types'
 
@@ -21,3 +22,4 @@ export function actionSignIn (payload: SignInResponse) {
     payload
   }
 }
+

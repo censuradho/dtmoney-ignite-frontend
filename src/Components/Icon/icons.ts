@@ -3,7 +3,8 @@ import {
   MdKeyboardArrowLeft, 
   MdKeyboardArrowRight,
   MdRemove,
-  MdSettings
+  MdSettings,
+  MdDelete
 } from 'react-icons/md'
 
 
@@ -12,5 +13,6 @@ export const icons = {
   arrowLeft: MdKeyboardArrowLeft,
   arrowRight: MdKeyboardArrowRight,
   remove: MdRemove,
-  settings: MdSettings
+  settings: MdSettings,
+  delete: MdDelete
 }

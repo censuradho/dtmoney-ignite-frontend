@@ -6,6 +6,7 @@ export const USER_REGISTRATION = {
 
 export const PERFIL_ERRORS = {
 	PERFIL_ALREADY_EXIST: 'PERFIL_ALREADY_EXIST',
+	USER_NOT_HAVE_RELATED_PERFIL_TO_DELETE: 'USER_NOT_HAVE_RELATED_PERFIL_TO_DELETE'
 }
 
 export const ACCOUNT_ERRORS = {
@@ -36,18 +37,20 @@ export const ERROR_CONSTANTS = {
 	...ACCOUNT_ERRORS,
 	...TRANSACTION_ERRORS,
 	...SERVER_ERRORS,
-	...AUTHENTICATION_ERRORS
+	...AUTHENTICATION_ERRORS,
+	DEFAULT: 'DEFAULT'
 }
 
 export const errorMessages = {
   [ERROR_CONSTANTS.EMAIL_OR_PASSWORD_ARE_INCORRECT]: 'Email ou senha incorretos',
 	[ERROR_CONSTANTS.USER_REGISTRATION_NOT_FOUND]: 'Email ou senha incorretos',
 	[ERROR_CONSTANTS.AUTHENTICATION_REFRASH_TOKEN_INVALID]: 'Sessão expirada',
-	[ERROR_CONSTANTS.AUTHENTICATION_TOKEN_EXPIRED]: 'Sessão expirada',
 	[ERROR_CONSTANTS.AUTHENTICATION_TOKEN_NOT_FOUND]: 'È nessesario o login',
 	[ERROR_CONSTANTS.AUTHENTICATION_TOKEN_INVALID]: 'Não possui autorização para isso',
 	[ERROR_CONSTANTS.INTERNAL_SERVER_ERROR]: 'Algo acounteceu com o servidor, contate o suporte',
 	[ERROR_CONSTANTS.PERFIL_ALREADY_EXIST]: 'Já existe um perfil relacionado à conta',
 	[ERROR_CONSTANTS.USER_REGISTRATION_ALREADY_EXIST]: 'Já existe uma conta relacionada a este E-mail',
-	[ERROR_CONSTANTS.VALIDATION_ERROR]: 'Houveram erros de validação, revise os campos do formulário'
+	[ERROR_CONSTANTS.VALIDATION_ERROR]: 'Houveram erros de validação, revise os campos do formulário',
+	[ERROR_CONSTANTS.DEFAULT]: 'Ocorreu algo de errado',
+	[ERROR_CONSTANTS.USER_NOT_HAVE_RELATED_PERFIL_TO_DELETE]: 'Usuário não tem perfil relacionado para excluir'
 }
