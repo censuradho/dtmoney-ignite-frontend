@@ -1,4 +1,3 @@
-import UserProvider from "Provider/UserProvider"
 import { memo } from "react"
 import { Outlet } from "react-router"
 
@@ -9,14 +8,12 @@ import * as Styles from './styles'
 
 function BaseAdmin () {
   return (
-    <UserProvider>
-      <Styles.Container>
-        <Header />
-        <Styles.Main>
-          <Outlet />
-        </Styles.Main>
-      </Styles.Container>
-    </UserProvider>
+    <Styles.Container>
+      <Header />
+      <Styles.Main>
+        <Outlet />
+      </Styles.Main>
+    </Styles.Container>
   )
 }
 

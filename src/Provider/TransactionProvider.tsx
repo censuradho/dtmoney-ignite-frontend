@@ -1,5 +1,6 @@
 import { useTransactions } from 'hooks/useTransactions'
 import { createContext, ReactNode, useContext } from 'react'
+import { Outlet } from 'react-router-dom'
 
 type TransactionContextProps = ReturnType<typeof useTransactions>
 

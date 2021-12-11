@@ -1,11 +1,12 @@
+import { FormEvent, useState} from 'react'
 import Modal from 'react-modal'
+
 import { Container, TransactionTypeContainer, RadioBox } from './styles'
 import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
-import { FormEvent, useState} from 'react'
 
-import { Input } from 'Components'
+import { Input, Button } from 'Components'
 import { TRANSACTION_TYPE } from 'constants/transaction'
 import { postTransaction } from 'services/transaction'
 import { useTransactionContext } from 'Provider/TransactionProvider'
@@ -95,9 +96,9 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
               </RadioBox>
             </TransactionTypeContainer>
 
-            <button type="submit" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading}>
                 Submit
-            </button>
+            </Button>
             
         </Container>
         </Modal>

@@ -6,7 +6,9 @@ const publicRoutes = {
 
 const privateRoutes = {
   root: '/app/*',
-  home: '/home'  
+  app: '/app',
+  home: '/home',
+  perfil: '/perfil',
 }
 
 export const routePaths = {

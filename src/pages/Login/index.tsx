@@ -17,6 +17,7 @@ import { actionSignIn } from 'store/ducks/auth'
 import { routePaths } from 'constants/routes'
 import useBoolean from 'hooks/useBoolean'
 import { setAuthHeader } from 'utils/setAuthHeader'
+import { openNotification } from 'utils/notification'
 
 
 export function Login () {
@@ -26,7 +27,7 @@ export function Login () {
   const [isLoading, toggleLoading] = useBoolean()
 
   const [payload, setPayload] = useState({
-    email: 'email@email.com',
+    email: 'teste@email.com',
     password: '123'
   } as SignInPayload)
 
@@ -39,7 +40,6 @@ export function Login () {
   }
 
   const handleSubmit = async (event: FormEvent) => {
-
     event.preventDefault()
     try {
     toggleLoading()
@@ -51,7 +51,8 @@ export function Login () {
     dispatch(actionSignIn(data))
 
     navigate(`/app${routePaths.private.home}`)
-    } catch (err) {} finally {
+    } catch (err) {
+    } finally {
       toggleLoading()
     }
   }

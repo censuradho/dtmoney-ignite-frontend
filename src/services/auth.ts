@@ -11,9 +11,9 @@ export async function signUp (payload: SignUpPayload) {
 }
 
 export async function refrashToken () {
-  return await api.get<RefrashTokenResponse>('auth/refrash-token')
+  return await api.get<RefrashTokenResponse>('/auth/refrash-token')
 }
 
 export async function signOut () {
-  return await api.get('auth/sign-out')
+  return await api.get('/auth/sign-out')
 }

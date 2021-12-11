@@ -2,7 +2,7 @@ import styled, { DefaultTheme } from 'styled-components'
 
 
 
-interface ButtonProps {
+export interface ButtonProps {
   fullWidth?: boolean
   variante?: keyof DefaultTheme['buttons']
 }

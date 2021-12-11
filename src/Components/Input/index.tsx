@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, memo } from 'react'
+import { forwardRef, InputHTMLAttributes, memo } from 'react'
 
 import * as Styles from './styles'
 
@@ -11,10 +11,8 @@ type InputProps  = Pick<InputHTMLAttributes<HTMLInputElement>,
   | 'placeholder'
   >
 
-function BaseInput (props: InputProps) {
-  return (
-    <Styles.Input {...props}/>
-  )
-}
+const BaseInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => (
+  <Styles.Input {...props} ref={ref} />
+))
 
 export const Input = memo(BaseInput)

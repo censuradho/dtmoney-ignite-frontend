@@ -16,3 +16,15 @@ export interface BaseQuery {
   _page?: number,
   _per_page?: number
 }
+
+export interface ErrorApi {
+  error?:{
+    message: string,
+    name: string
+  }
+  errors?: {
+    field: string
+    type: string,
+    error_messages: string[]
+  }
+}

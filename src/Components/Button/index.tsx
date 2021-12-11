@@ -3,13 +3,13 @@ import * as Styles from './styles'
 
 type RootButtonProps = Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'type' | 'disabled'>
 
-interface ButtonProps extends RootButtonProps {
+interface ButtonProps extends RootButtonProps, Styles.ButtonProps {
   children: ReactNode
 }
 
 function BaseButton ({ children, ...props}: ButtonProps) {
   return (
-    <Styles.Button {...props}>{{ children }}</Styles.Button>
+    <Styles.Button {...props}>{children}</Styles.Button>
   )
 }
 
