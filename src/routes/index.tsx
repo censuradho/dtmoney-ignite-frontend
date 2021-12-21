@@ -2,11 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 
 import { routePaths } from 'constants/routes'
 
-import {  RequireComponent } from './components'
-
 import { Login, Registration  } from 'pages'
-
-import { Admin } from 'layout'
 
 import { PrivateRoutes } from './PrivateRoutes'
 import UserProvider from 'Provider/UserProvider'

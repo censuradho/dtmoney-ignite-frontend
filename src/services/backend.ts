@@ -6,7 +6,9 @@ import { refrashToken } from 'services/auth'
 import { StoreRoot } from 'store'
 
 import { actionRefrashToken, actionSignOut } from 'store/ducks/auth'
+
 import { ErrorApi } from 'types/backend'
+
 import { openNotification } from 'utils/notification'
 import { setAuthHeader } from 'utils/setAuthHeader'
 
@@ -14,19 +16,7 @@ export const backend = axios.create({
   baseURL: 'http://localhost:3333'
 })
 
-backend.interceptors.response.use(config => {
-  const { data } = config
-    
-
-  if (data && data.status >= 400) {
-    const {  error } = data
-
-    openNotification(errorMessages[error.name], {
-      type: 'error'
-    })
-  }
-  return config
-}, async (data: AxiosError<ErrorApi>) => {
+backend.interceptors.response.use(undefined, async (data: AxiosError<ErrorApi>) => {
   const { response } = data
     
 

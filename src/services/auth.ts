@@ -1,6 +1,11 @@
 import api from './backend'
 
-import { RefrashTokenResponse, SignInPayload, SignInResponse, SignUpPayload } from 'types/auth'
+import { 
+  RefrashTokenResponse, 
+  SignInPayload, 
+  SignInResponse, 
+  SignUpPayload 
+} from 'types/auth'
 
 export async function signIn (payload: SignInPayload) {
   return await api.post<SignInResponse>('/auth/sign-in', payload)

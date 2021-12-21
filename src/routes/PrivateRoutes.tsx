@@ -16,6 +16,8 @@ useEffect(() => {
   if (!auth?.token) navigation(routePaths.public.login)
 }, [auth])
   
+if (!auth?.token) return null
+
   return (
       <Routes>
         <Route element={<Admin />}>

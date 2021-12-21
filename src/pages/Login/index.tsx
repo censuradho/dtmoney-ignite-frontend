@@ -63,7 +63,7 @@ export function Login () {
       <h1>Login</h1>
       <Styles.Form onSubmit={handleSubmit}>
         <Input placeholder="E-mail" name="email" value={payload.email} onChange={handleChange} />
-        <Input placeholder="Password" name="password" value={payload.password} onChange={handleChange}/>
+        <Input placeholder="Password" type="password" name="password" value={payload.password} onChange={handleChange}/>
         <Button variante="green" disabled={isLoading} fullWidth>Login</Button>
         <span>Não tem uma conta? <Styles.Link to={routePaths.public.registration}>Cadastre-se</Styles.Link></span>
       </Styles.Form>
